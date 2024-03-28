@@ -89,6 +89,10 @@ Stage: build
     # # apt pkg install
     # #################################
     DEBIAN_FRONTEND=noninteractive apt install -y ros-noetic-rosbridge-server
+    # Navigation
+    DEBIAN_FRONTEND=noninteractive apt install -y ros-noetic-amcl apt install ros-noetic-base-local-planner ros-noetic-map-server ros-noetic-move-base
+    DEBIAN_FRONTEND=noninteractive apt install -y ros-noetic-moveit
+
     # DEBIAN_FRONTEND=noninteractive apt install -y libpcap-dev
     # DEBIAN_FRONTEND=noninteractive apt install -y ros-noetic-navigation
     # DEBIAN_FRONTEND=noninteractive apt install -y ros-noetic-robot-localization
