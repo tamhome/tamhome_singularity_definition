@@ -12,6 +12,7 @@ Stage: build
     # files ファイルのマウント
     ############################################
     ./entrypoint.sh /
+    ./requirements.txt /
 
 %environment
     ############################################
@@ -78,8 +79,6 @@ Stage: build
     make && \
     make install
 
-
-
     # ##################################
     # # apt pkg install
     # #################################
@@ -88,6 +87,9 @@ Stage: build
     # Navigation
     DEBIAN_FRONTEND=noninteractive apt install -y ros-noetic-amcl ros-noetic-base-local-planner ros-noetic-map-server ros-noetic-move-base
     DEBIAN_FRONTEND=noninteractive apt install -y ros-noetic-moveit
+
+    # pip install
+    pip install -r /requirements.txt
 
     # finalize
     rm -rf /var/lib/apt/lists/*

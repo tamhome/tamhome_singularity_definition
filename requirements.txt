@@ -1,0 +1,11 @@
+dearpygui
+pyperclip 
+hdbscan 
+ultralytics 
+onnx 
+onnxsim
+nvidia-pyindex
+# nvidia-tensorrt
+openai
+loguru
+-e git+https://github.com/TamlabHSRProject/tamlib.git#egg=tamlib-0.0.1
