@@ -78,8 +78,6 @@ Stage: build
     make && \
     make install
 
-
-
     # ##################################
     # # apt pkg install
     # #################################
@@ -88,6 +86,21 @@ Stage: build
     # Navigation
     DEBIAN_FRONTEND=noninteractive apt install -y ros-noetic-amcl ros-noetic-base-local-planner ros-noetic-map-server ros-noetic-move-base
     DEBIAN_FRONTEND=noninteractive apt install -y ros-noetic-moveit
+    DEBIAN_FRONTEND=noninteractive apt install -y ninja
+    DEBIAN_FRONTEND=noninteractive apt install -y ros-noetic-robot-state-publisher
+    DEBIAN_FRONTEND=noninteractive apt install -y ros-noetic-moveit-commander
+    DEBIAN_FRONTEND=noninteractive apt install -y ros-noetic-moveit-ros-perception
+    DEBIAN_FRONTEND=noninteractive apt install -y ros-noetic-exotica-ompl-solver
+    DEBIAN_FRONTEND=noninteractive apt install -y ros-noetic-moveit-planners-ompl
+    DEBIAN_FRONTEND=noninteractive apt install -y ros-noetic-moveit-visual-tools
+    DEBIAN_FRONTEND=noninteractive apt install -y ros-noetic-moveit
+    DEBIAN_FRONTEND=noninteractive apt install -y ros-noetic-joint-trajectory-controller
+    # DEBIAN_FRONTEND=noninteractive apt install -y ros-noetic-hsrb-analytic-ik  # tmcのパスを追加しないと見えない可能性あり
+
+    # pytorch3dは0.7.5と0.7.6で動作確認済み
+    # pip install git+https://github.com/facebookresearch/pytorch3d.git
+    # python -m pip install detectron2 -f https://dl.fbaipublicfiles.com/detectron2/wheels/cu101/torch1.8/index.html
+    # pip install pillow==9.1.0
 
     # finalize
     rm -rf /var/lib/apt/lists/*
