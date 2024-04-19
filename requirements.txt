@@ -9,3 +9,6 @@ nvidia-pyindex
 openai
 loguru
 -e git+https://github.com/TamlabHSRProject/tamlib.git#egg=tamlib-0.0.1
+onnx==1.13.0
+onnxruntime==1.8.1
+tensorrt==8.5.3.1
