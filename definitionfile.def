@@ -12,6 +12,7 @@ Stage: build
     # files ファイルのマウント
     ############################################
     ./entrypoint.sh /
+    ./requirements.txt /
 
 %environment
     ############################################
@@ -101,6 +102,9 @@ Stage: build
     # pip install git+https://github.com/facebookresearch/pytorch3d.git
     # python -m pip install detectron2 -f https://dl.fbaipublicfiles.com/detectron2/wheels/cu101/torch1.8/index.html
     # pip install pillow==9.1.0
+
+    # pip install
+    pip install -r /requirements.txt
 
     # finalize
     rm -rf /var/lib/apt/lists/*
