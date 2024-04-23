@@ -79,6 +79,9 @@ Stage: build
     make && \
     make install
 
+    # cuda11.7 full install
+    apt-get -y install cuda-11-7
+
     # ##################################
     # # apt pkg install
     # #################################
@@ -96,6 +99,9 @@ Stage: build
     DEBIAN_FRONTEND=noninteractive apt install -y ros-noetic-moveit-visual-tools
     DEBIAN_FRONTEND=noninteractive apt install -y ros-noetic-moveit
     DEBIAN_FRONTEND=noninteractive apt install -y ros-noetic-joint-trajectory-controller
+    DEBIAN_FRONTEND=noninteractive apt install -y ros-noetic-dwa-local-planner
+    # yolov8
+    DEBIAN_FRONTEND=noninteractive apt install -y libcudnn8 libcublas-12-0 nvidia-cuda-toolkit
     # DEBIAN_FRONTEND=noninteractive apt install -y ros-noetic-hsrb-analytic-ik  # tmcのパスを追加しないと見えない可能性あり
 
     # pytorch3dは0.7.5と0.7.6で動作確認済み
