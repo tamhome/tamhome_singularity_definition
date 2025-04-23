@@ -48,9 +48,35 @@ Stage: build
     DEBIAN_FRONTEND=noninteractive apt install -y ros-noetic-desktop-full
     DEBIAN_FRONTEND=noninteractive apt install -y python3-rosdep python3-rosinstall python3-vcstools python3-catkin-tools
 
-    # python setup
-    ln -sf /usr/bin/python3 /usr/bin/python
-    curl -kL https://bootstrap.pypa.io/pip/get-pip.py | python
+    # venvに切り替え
+    DEBIAN_FRONTEND=noninteractive apt update && apt install -y \
+        python3.10 \
+        python3.10-venv \
+        python3.10-dev \
+        python3-pip \
+        build-essential \
+        git \
+        wget && \
+        apt clean && rm -rf /var/lib/apt/lists/*
+
+    DEBIAN_FRONTEND=noninteractive apt update && apt install -y qtbase5-dev qtchooser qt5-qmake qtbase5-dev-tools
+    DEBIAN_FRONTEND=noninteractive apt update && apt install -y x11-apps
+    DEBIAN_FRONTEND=noninteractive apt update && apt install -y jupyter-core jupyter-notebook
+
+    DEBIAN_FRONTEND=noninteractive apt update && apt install -y libxcb-cursor0
+    DEBIAN_FRONTEND=noninteractive apt update && apt install -y libxcb-xinerama0 libxcb-icccm4 libxcb-image0 \
+        libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-shape0 \
+        libxcb-xfixes0 libxcb-sync1 libxcb-xinput0
+
+    # 仮想環境のディレクトリを作成
+    mkdir -p /opt/venv
+
+    # 仮想環境を作成
+    python3.10 -m venv /opt/venv
+
+    # 仮想環境を有効化してpipをアップグレード
+    . /opt/venv/bin/activate && \
+    pip install --upgrade pip setuptools wheel
 
     # set entrypoint.sh
     # source /opt/ros/noetic/setup.bash
@@ -110,7 +136,7 @@ Stage: build
     # pip install pillow==9.1.0
 
     # pip install
-    pip install -r /requirements.txt
+    /opt/venv/bin/pip install -r /requirements.txt
 
     # finalize
     rm -rf /var/lib/apt/lists/*
