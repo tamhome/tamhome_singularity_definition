@@ -50,9 +50,9 @@ Stage: build
 
     # venvに切り替え
     DEBIAN_FRONTEND=noninteractive apt update && apt install -y \
-        python3.10 \
-        python3.10-venv \
-        python3.10-dev \
+        python3.8 \
+        python3.8-venv \
+        python3.8-dev \
         python3-pip \
         build-essential \
         git \
@@ -72,7 +72,7 @@ Stage: build
     mkdir -p /opt/venv
 
     # 仮想環境を作成
-    python3.10 -m venv /opt/venv
+    python3.8 -m venv /opt/venv
 
     # 仮想環境を有効化してpipをアップグレード
     . /opt/venv/bin/activate && \
@@ -106,7 +106,12 @@ Stage: build
     make install
 
     # cuda11.7 full install
-    apt-get -y install cuda-11-7
+    # wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
+    # mv cuda-ubuntu2004.pin /etc/apt/preferences.d/cuda-repository-pin-600
+    # apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/3bf863cc.pub
+    # add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/ /"
+    # apt-get update
+    # apt-get -y install cuda-11-7
 
     # ##################################
     # # apt pkg install
@@ -116,7 +121,7 @@ Stage: build
     # Navigation
     DEBIAN_FRONTEND=noninteractive apt install -y ros-noetic-amcl ros-noetic-base-local-planner ros-noetic-map-server ros-noetic-move-base
     DEBIAN_FRONTEND=noninteractive apt install -y ros-noetic-moveit
-    DEBIAN_FRONTEND=noninteractive apt install -y ninja
+    # DEBIAN_FRONTEND=noninteractive apt install -y ninja
     DEBIAN_FRONTEND=noninteractive apt install -y ros-noetic-robot-state-publisher
     DEBIAN_FRONTEND=noninteractive apt install -y ros-noetic-moveit-commander
     DEBIAN_FRONTEND=noninteractive apt install -y ros-noetic-moveit-ros-perception
@@ -127,7 +132,7 @@ Stage: build
     DEBIAN_FRONTEND=noninteractive apt install -y ros-noetic-joint-trajectory-controller
     DEBIAN_FRONTEND=noninteractive apt install -y ros-noetic-dwa-local-planner
     # yolov8
-    DEBIAN_FRONTEND=noninteractive apt install -y libcudnn8 libcublas-12-0 nvidia-cuda-toolkit
+    # DEBIAN_FRONTEND=noninteractive apt install -y libcudnn8 libcublas-12-0 nvidia-cuda-toolkit
     # DEBIAN_FRONTEND=noninteractive apt install -y ros-noetic-hsrb-analytic-ik  # tmcのパスを追加しないと見えない可能性あり
 
     # pytorch3dは0.7.5と0.7.6で動作確認済み
@@ -136,11 +141,15 @@ Stage: build
     # pip install pillow==9.1.0
 
     # pip install
-    /opt/venv/bin/pip install -r /requirements.txt
+    # /opt/venv/bin/pip install -r /requirements.txt
+
+    ln -sf /opt/venv/bin/python3 /usr/bin/python3
+    ln -sf /opt/venv/bin/python /usr/bin/python
+    ln -sf /opt/venv/bin/pip3 /usr/bin/pip3
+    ln -sf /opt/venv/bin/pip3 /usr/bin/pip
 
     # finalize
     rm -rf /var/lib/apt/lists/*
-
 
 %runscript
     ############################################

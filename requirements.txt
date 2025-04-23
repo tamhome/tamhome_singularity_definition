@@ -7,11 +7,16 @@ onnxsim
 nvidia-pyindex
 # nvidia-tensorrt
 loguru
--e git+https://github.com/TamlabHSRProject/tamlib.git#egg=tamlib-0.0.1
+## -e git+https://github.com/TamlabHSRProject/tamlib.git#egg=tamlib-0.0.1
 onnx==1.13.0
 onnxruntime==1.8.1
 tensorrt==8.5.3.1
-openai==0.28.0
+# openai==0.28.0
+openai==1.63.2
 rapidfuzz==3.8.1
-# -e git+https://github.com/IDEA-Research/GroundingDINO.git
+git+https://github.com/IDEA-Research/GroundingDINO.git
 # -e 
+torch==2.4.1
+torchaudio==0.13.1
+torchmetrics==1.3.2
+torchvision==0.19.1
