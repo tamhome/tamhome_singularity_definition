@@ -131,6 +131,10 @@ Stage: build
     DEBIAN_FRONTEND=noninteractive apt install -y ros-noetic-moveit
     DEBIAN_FRONTEND=noninteractive apt install -y ros-noetic-joint-trajectory-controller
     DEBIAN_FRONTEND=noninteractive apt install -y ros-noetic-dwa-local-planner
+    # DEBIAN_FRONTEND=noninteractive apt install -y libeigen3*
+    DEBIAN_FRONTEND=noninteractive apt install -y libeigen3-dev libcppunit-dev
+    DEBIAN_FRONTEND=noninteractive apt install -y python3-psutil python3-future
+    
     # yolov8
     # DEBIAN_FRONTEND=noninteractive apt install -y libcudnn8 libcublas-12-0 nvidia-cuda-toolkit
     # DEBIAN_FRONTEND=noninteractive apt install -y ros-noetic-hsrb-analytic-ik  # tmcのパスを追加しないと見えない可能性あり
@@ -147,6 +151,8 @@ Stage: build
     ln -sf /opt/venv/bin/python /usr/bin/python
     ln -sf /opt/venv/bin/pip3 /usr/bin/pip3
     ln -sf /opt/venv/bin/pip3 /usr/bin/pip
+
+    echo ". /opt/venv/bin/activate" >> /entrypoint.sh
 
     # finalize
     rm -rf /var/lib/apt/lists/*
